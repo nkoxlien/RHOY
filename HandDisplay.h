@@ -5,20 +5,19 @@
 *****************************************/
 
 
-#ifndef _HAND_DISPLAY_H__
-#define _HAND_DISPLAY_H__
+#ifndef HAND_DISPLAY_H__
+#define HAND_DISPLAY_H__
 
 #include "NiHandTracker.h"
 
 class HandDisplay{
 
 
-	public: 
-		XnStatus Init();
-		XnStaus Run();
-		
-	protected:
-		HandDisplay(xn::Context context);
+	public:
+ 
+		virtual XnStatus Init();
+		virtual XnStatus Run();
+		HandDisplay(xn::Context& context);
 
 	private: 
 		
@@ -26,3 +25,4 @@ class HandDisplay{
 	
 };
 
+#endif //HAND_DISPLAY_H__

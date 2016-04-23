@@ -7,7 +7,7 @@
 
 #include "HandDisplay.h"
 
-#define SAMPLE_XML_PATH "Config/SamplesConfig.xml"
+#define SAMPLE_XML_PATH "../../Config/SamplesConfig.xml"
 
 
 xn::Context		g_context;
@@ -33,13 +33,13 @@ int main(int argc, char* argv[]){
         }
 
 
-	HandDisplay display = new HandDisplay(g_context);	
+	HandDisplay display(g_context);	
 
 	rc = display.Init();
 	
 	if(rc != XN_STATUS_OK){
 		
-		printf("Display init failed: %s\n", xnGetStatusString(rc));i
+		printf("Display init failed: %s\n", xnGetStatusString(rc));
 		return(1);
 	}
 

@@ -38,11 +38,9 @@ XnStatus HandDisplay::Run(){
 		typedef Trail::ConstIterator		TrailIterator;
 
 
-		const TrailHistory&	history = m_HandTracker.GetHistory();
-
-		XnFloat[3 * MAX_HAND_TRAIL_LENGTH];
-	
+		const TrailHistory&	history = m_HandTracker.GetHistory();	
 		const HistoryIterator hend = history.End();
+
 		for(HistoryIterator hit = history.Begin(); hit != hend; ++hit){
 			
 			int numpoints = 0;
@@ -53,13 +51,10 @@ XnStatus HandDisplay::Run(){
 
 				XnPoint3D	point = *tit;
 
-				printf("X = %.2f, Y = %.2f, Z = %.2f\n", point.X, point.Y, point.z);
+				printf("X = %.2f, Y = %.2f, Z = %.2f\n", point.X, point.Y, point.Z);
 			}
 		}
 	}
 
-	return void;
+	return rc;
 }
-
-
-
