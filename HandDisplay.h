@@ -18,11 +18,7 @@ class HandDisplay{
 		virtual XnStatus Init();
 		virtual XnStatus Run();
 		HandDisplay(xn::Context& context);
-
-	private: 
-		
 		HandTracker m_HandTracker;
-	
 };
 
 #endif //HAND_DISPLAY_H__

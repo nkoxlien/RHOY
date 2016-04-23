@@ -52,5 +52,32 @@ int main(int argc, char* argv[]){
 		return(1);
 	}
 
+	while(!xnOSWasKeyboardHit()){
+
+		rc = g_context.WaitAnyUpdateAll();
+		if (rc != XN_STATUS_OK){
+
+			printf("UpdateData failed: %s\n", xnGetStatusString(rc));
+			continue;
+		}
+		
+		
+		typedef TrailHistory			History;
+		typedef History::ConstIterator 		HistoryIterator;
+		typedef Trail::ConstIterator		TrailIterator;
+
+
+		const TrailHistory&	history = display.m_HandTracker.GetHistory();	
+		const HistoryIterator hend = history.End();
+		HistoryIterator hit = history.Begin();
+
+		const Trail& trail = hit -> Value();
+		const TrailIterator tit = trail.Begin();
+			
+		XnPoint3D	point = *tit;
+
+		printf("X = %.2f, Y = %.2f, Z = %.2f\n", point.X, point.Y, point.Z);
+	}
+
 	return(0);
 }
