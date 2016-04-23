@@ -1,3 +1,10 @@
+/****************************************
+*
+* Author: Nick Koxlien
+*
+*****************************************/
+
+
 #ifndef _HAND_DISPLAY_H__
 #define _HAND_DISPLAY_H__
 
