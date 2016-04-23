@@ -32,7 +32,6 @@ XnStatus HandDisplay::Run(){
 
 
 	while(!xnOSWasKeyboardHit()){
-	
 		typedef TrailHistory			History;
 		typedef History::ConstIterator 		HistoryIterator;
 		typedef Trail::ConstIterator		TrailIterator;
@@ -43,6 +42,7 @@ XnStatus HandDisplay::Run(){
 
 		for(HistoryIterator hit = history.Begin(); hit != hend; ++hit){
 			
+	
 			int numpoints = 0;
 			const Trail&		trail = hit -> Value();
 			
