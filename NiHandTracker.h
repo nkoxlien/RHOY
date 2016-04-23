@@ -26,7 +26,7 @@
 #include <XnHashT.h>
 
 // Hand position history length (positions)
-#define MAX_HAND_TRAIL_LENGTH	1
+#define MAX_HAND_TRAIL_LENGTH	2
 
 typedef XnCyclicStackT<XnPoint3D, MAX_HAND_TRAIL_LENGTH> Trail;
 typedef XnHashT<XnUserID, Trail> TrailHistory;

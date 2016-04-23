@@ -65,7 +65,7 @@ ifeq "$(CFG)" "Debug"
 	CFLAGS += -O0 -g
 endif
 ifeq "$(CFG)" "Release"
-	CFLAGS += -O2 -DNDEBUG
+	CFLAGS += -O2 -g
 endif
 
 CFLAGS += $(INC_DIRS_OPTION) $(DEFINES_OPTION)

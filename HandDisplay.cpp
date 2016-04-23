@@ -39,7 +39,6 @@ XnStatus HandDisplay::Run(){
 
 		const TrailHistory&	history = m_HandTracker.GetHistory();	
 		const HistoryIterator hend = history.End();
-
 		for(HistoryIterator hit = history.Begin(); hit != hend; ++hit){
 			
 	
