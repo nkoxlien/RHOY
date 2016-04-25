@@ -57,7 +57,7 @@ static const char* const	cGestures[] =
 // Statics
 //---------------------------------------------------------------------------
 XnListT<HandTracker*>	HandTracker::sm_Instances;
-
+XnUserID User;
 
 //---------------------------------------------------------------------------
 // Hooks
@@ -94,6 +94,8 @@ void XN_CALLBACK_TYPE HandTracker::Hand_Create(	xn::HandsGenerator& /*generator*
 		printf("Dead HandTracker: skipped!\n");
 		return;
 	}
+
+	User = nId;
 
 	pThis->m_History[nId].Push(*pPosition);
 }
@@ -138,6 +140,7 @@ void XN_CALLBACK_TYPE HandTracker::Hand_Destroy(	xn::HandsGenerator& /*generator
 
 	// Remove this user from hands history
 	pThis->m_History.Remove(nId);
+	User = 0;
 }
 
 
@@ -163,11 +166,18 @@ HandTracker::~HandTracker()
 	sm_Instances.Remove(it);
 }
 
+
+XnUserID HandTracker::GetID(){
+
+	return User;
+}
+
 XnStatus HandTracker::Init()
 {            
 	XnStatus			rc;
 	XnCallbackHandle	chandle;
-
+	XnFloat			smoothFactor;
+	
 	// Create generators
 	rc = m_GestureGenerator.Create(m_rContext);
 	if (rc != XN_STATUS_OK)
@@ -183,6 +193,14 @@ XnStatus HandTracker::Init()
 		return rc;
 	}
 
+	smoothFactor = 0.1;
+	rc = m_HandsGenerator.SetSmoothing(smoothFactor);
+
+	if(rc != XN_STATUS_OK){
+		printf("Unable to set smoothing factor");
+		return rc;
+	}
+	
 	// Register callbacks
 	// Using this as cookie
 	rc = m_GestureGenerator.RegisterGestureCallbacks(Gesture_Recognized, Gesture_Process, this, chandle);

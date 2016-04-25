@@ -54,6 +54,7 @@ int main(int argc, char* argv[]){
 
 	while(!xnOSWasKeyboardHit()){
 
+		XnUserID ID;
 		rc = g_context.WaitAnyUpdateAll();
 		if (rc != XN_STATUS_OK){
 
@@ -61,22 +62,26 @@ int main(int argc, char* argv[]){
 			continue;
 		}
 		
+		if((ID = display.m_HandTracker.GetID()) != 0){
 		
-		typedef TrailHistory			History;
-		typedef History::ConstIterator 		HistoryIterator;
-		typedef Trail::ConstIterator		TrailIterator;
+			typedef TrailHistory			History;
+			typedef History::ConstIterator 		HistoryIterator;
+			typedef Trail::ConstIterator		TrailIterator;
 
 
-		const TrailHistory&	history = display.m_HandTracker.GetHistory();	
-		const HistoryIterator hend = history.End();
-		HistoryIterator hit = history.Begin();
+			const TrailHistory&	history = display.m_HandTracker.GetHistory();	
+			const HistoryIterator hend = history.End();
+			HistoryIterator hit = history.Begin();
 
-		const Trail& trail = hit -> Value();
-		const TrailIterator tit = trail.Begin();
+			const Trail& trail = hit -> Value();
+			const TrailIterator tit = trail.Begin();
 			
-		XnPoint3D	point = *tit;
+			XnPoint3D	point = *tit;
+		
 
-		printf("X = %.2f, Y = %.2f, Z = %.2f\n", point.X, point.Y, point.Z);
+			printf("User ID = %i\n", ID);
+			printf("X = %.2f, Y = %.2f, Z = %.2f\n", point.X, point.Y, point.Z);
+		}
 	}
 
 	return(0);
