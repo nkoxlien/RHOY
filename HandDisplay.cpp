@@ -33,3 +33,33 @@ XnStatus HandDisplay::Run(){
 	return rc;
 
 }
+
+int HandDisplay::getQuadrant(XnPoint3D point){
+	int xLevel, yLevel, zLevel;
+	
+	if((xLevel = getXLevel(point.X)) == 0){
+		printf("XLevel out of range\n");
+	}
+
+	if((yLevel = getYLevel(point.Y)) == 0){
+
+		printf("YLevel out of range\n");
+	}
+
+	if((zLevel = getZLevel(point.Z)) == 0){
+
+		printf("ZLevel out of range\n");
+	}
+}
+
+int HandDisplay::getXLevel(float x){
+
+}
+
+int HandDisplay::getYLevel(float y){
+
+}
+
+int HandDisplay::getZLevel(float Z){
+
+}

@@ -14,7 +14,8 @@ xn::Context		g_context;
 xn::ScriptNode		g_scriptNode;
 
 int main(int argc, char* argv[]){
-
+	
+	XnUserID currentID;
 	XnStatus rc;
 	xn::EnumerationErrors errors;
 
@@ -63,7 +64,14 @@ int main(int argc, char* argv[]){
 		}
 		
 		if((ID = display.m_HandTracker.GetID()) != 0){
-		
+			if( currentID == 0 ){
+				currentID = ID;
+			}	
+			
+			else if( currentID != ID){
+
+				continue;
+			}
 			typedef TrailHistory			History;
 			typedef History::ConstIterator 		HistoryIterator;
 			typedef Trail::ConstIterator		TrailIterator;
@@ -81,6 +89,10 @@ int main(int argc, char* argv[]){
 
 			printf("User ID = %i\n", ID);
 			printf("X = %.2f, Y = %.2f, Z = %.2f\n", point.X, point.Y, point.Z);
+		}
+		
+		else{
+		 currentID = 0;
 		}
 	}
 

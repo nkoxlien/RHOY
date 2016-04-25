@@ -94,10 +94,13 @@ void XN_CALLBACK_TYPE HandTracker::Hand_Create(	xn::HandsGenerator& /*generator*
 		printf("Dead HandTracker: skipped!\n");
 		return;
 	}
+	
+	if(User == 0){
 
-	User = nId;
+		User = nId;
 
-	pThis->m_History[nId].Push(*pPosition);
+		pThis->m_History[nId].Push(*pPosition);
+	}
 }
 
 void XN_CALLBACK_TYPE HandTracker::Hand_Update(	xn::HandsGenerator& /*generator*/, 
