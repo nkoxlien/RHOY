@@ -10,6 +10,14 @@
 
 #include "NiHandTracker.h"
 
+#define RESOLUTION	3
+#define MAXX		750
+#define MINX		-750
+#define MAXY		450
+#define MINY		-450
+#define MAXZ		1400
+#define MINZ		600
+			
 class HandDisplay{
 
 
@@ -19,7 +27,10 @@ class HandDisplay{
 		virtual XnStatus Run();
 		HandDisplay(xn::Context& context);
 		HandTracker m_HandTracker;
-		int getQuadrant(XnPoint3D point);
+		int GetQuadrant(XnPoint3D point);
+
+	private:
+		
 		int getXLevel(float x);
 		int getYLevel(float y);
 		int getZLevel(float z);

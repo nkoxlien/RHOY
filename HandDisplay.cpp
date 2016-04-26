@@ -2,8 +2,9 @@
 * HandDisplay.cpp
 * Author: Nick Koxlien
 *
-* Detects a hand and prints the x,y, and z
-* coordinates to the console
+* Initializes the Hand Tracker and given the 
+* XnPoint3D of the hand returns the quadrant in
+* 3D space that the hand is currently in 
 **********************************************/
 
 
@@ -34,61 +35,95 @@ XnStatus HandDisplay::Run(){
 
 }
 
-int HandDisplay::getQuadrant(XnPoint3D point){
-	int xLevel, yLevel, zLevel;
+int HandDisplay::GetQuadrant(XnPoint3D point){
+	int xLevel, yLevel, zLevel, quadrant;
 	
 	if((xLevel = getXLevel(point.X)) == 0){
 		printf("XLevel out of range\n");
+		return 0;
 	}
 
 	if((yLevel = getYLevel(point.Y)) == 0){
 
 		printf("YLevel out of range\n");
+		return 0;
 	}
 
 	if((zLevel = getZLevel(point.Z)) == 0){
 
 		printf("ZLevel out of range\n");
+		return 0;
 	}
+
+	quadrant = (xLevel + (RESOLUTION * (yLevel - 1)) + ((RESOLUTION * RESOLUTION) * (zLevel - 1)));
+	
+	return quadrant;	
 }
 
 int HandDisplay::getXLevel(float x){
 	
-	if(x > 750 || x < -750){
+	int resLength, level;
+	
+	if(x > MAXX || x < MINX){
 		
 		return 0;	
 	}
 
-	if(x > 233){
-		return 3;
-	}	
+	resLength = (MAXX - MINX) / RESOLUTION;
+
+	for(int i = 1; i <= RESOLUTION; i++){
 	
-	if(x > -233){
-		return 2;
+		if( x > (MAXX - (i * resLength))){
+			level = RESOLUTION - (i-1);
+			return level; 
+		}			
 	}
+
+	return 0;
 	
-	return 1;
 }
 
 int HandDisplay::getYLevel(float y){
 	
-	if(y > 450 || y < -450){
-
-		return 0;
+	int resLength, level;
+	
+	if(y > MAXY || y < MINY){
+		
+		return 0;	
 	}
 
-	if(y > 150){
-		return 1;
+	resLength = (MAXY - MINY) / RESOLUTION;
+
+	for(int i = 1; i <= RESOLUTION; i++){
+	
+		if( y > (MAXY - (i * resLength))){
+			level = i; 
+			return level;
+		}			
 	}
 	
-	if(y > -150){
-		return 2;
-	}
-
-	return 3;
+	return 0;
+		
 }
 
-//Base is 1000, closest is 600, farthest 1400
 int HandDisplay::getZLevel(float Z){
+	
+	int resLength, level;
+	
+	if(z > MAXZ || z < MINZ){
+		
+		return 0;	
+	}
 
+	resLength = (MAXZ - MINZ) / RESOLUTION;
+
+	for(int i = 1; i <= RESOLUTION; i++){
+	
+		if( z > (MAXZ - (i * resLength))){
+			level = i;
+			return level; 
+		}			
+	}
+	
+	return 0;
 }

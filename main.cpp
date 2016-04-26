@@ -6,6 +6,7 @@
 *********************************************************/
 
 #include "HandDisplay.h"
+#include "ArmTranslator.h"
 
 #define SAMPLE_XML_PATH "../../Config/SamplesConfig.xml"
 
@@ -85,14 +86,20 @@ int main(int argc, char* argv[]){
 			const TrailIterator tit = trail.Begin();
 			
 			XnPoint3D	point = *tit;
-		
-
+			int quadrant;
+				
+			if((quadrant = display.GetQuadrant(point)) < 1){
+				printf("Hand outside of range\n");
+				continue;
+			}
+	
 			printf("User ID = %i\n", ID);
 			printf("X = %.2f, Y = %.2f, Z = %.2f\n", point.X, point.Y, point.Z);
+			printf("Quadrant = %i\n", quadrant);
 		}
 		
 		else{
-		 currentID = 0;
+			currentID = 0;
 		}
 	}
 
