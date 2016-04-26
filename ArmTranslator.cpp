@@ -14,9 +14,9 @@ ArmTranslator::ArmTranslator(){};
 
 int ArmTranslator::GetMotor1Value(int x){
 	
-	int value;
-	value = (((x-1)/(RESOLUTION-1)) * 1800) + 600;
-	
+	int value, resolution;
+	resolution = RESOLUTION;
+	value = (x-1) * (2400 -600) / (RESOLUTION - 1) + 600;
 	return 	value;
 }
 

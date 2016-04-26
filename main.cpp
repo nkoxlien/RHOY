@@ -99,18 +99,25 @@ int main(int argc, char* argv[]){
 				printf("Y-Level out of range\n");
 				continue;
 			}
-			if((zLevel = display.getXLevel(point.X)) < 1){
+			/*if((zLevel = display.getXLevel(point.Z)) < 1){
 				printf("Z-Level out of range\n");
 				continue;
-			}
+			}*/
 			
-			if((motor1Val = translator.GetMotor1Value(xLevel)) < 600 || motor1Val > 2400){
+			if((motor1Val = translator.GetMotor1Value(xLevel)) < 600){
+				printf("Error Translating value for motor 1\n");
+				continue;
+			}
+
+			if(motor1Val > 2400){
+				
 				printf("Error Translating value for motor 1\n");
 				continue;
 			}
 	
 			printf("User ID = %i\n", ID);
 			printf("X = %.2f, Y = %.2f, Z = %.2f\n", point.X, point.Y, point.Z);
+			//printf("X-Level = %i\n", xLevel);
 			printf("MOTOR 1 VALUE: %i\n", motor1Val);
 		}
 		
