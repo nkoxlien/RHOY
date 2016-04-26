@@ -12,7 +12,7 @@
 ArmTranslator::ArmTranslator(){};
 
 
-int GetMotor1Value(int x){
+int ArmTranslator::GetMotor1Value(int x){
 	
 	int value;
 	value = (((x-1)/(RESOLUTION-1)) * 1800) + 600;
@@ -20,12 +20,12 @@ int GetMotor1Value(int x){
 	return 	value;
 }
 
-int GetMotor2Value(int y, int z){
+int ArmTranslator::GetMotor2Value(int y, int z){
 
 	return 0;
 }
 
-int GetMotor3Value(int y, int z){
+int ArmTranslator::GetMotor3Value(int y, int z){
 
 	return 0;
 }
