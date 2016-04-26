@@ -53,13 +53,42 @@ int HandDisplay::getQuadrant(XnPoint3D point){
 }
 
 int HandDisplay::getXLevel(float x){
+	
+	if(x > 750 || x < -750){
+		
+		return 0;	
+	}
 
+	if(x > 233){
+		return 3;
+	}	
+	
+	if(x > -233){
+		return 2;
+	}
+	
+	return 1;
 }
 
 int HandDisplay::getYLevel(float y){
+	
+	if(y > 450 || y < -450){
 
+		return 0;
+	}
+
+	if(y > 150){
+		return 1;
+	}
+	
+	if(y > -150){
+		return 2;
+	}
+
+	return 3;
 }
 
+//Base is 1000, closest is 600, farthest 1400
 int HandDisplay::getZLevel(float Z){
 
 }
