@@ -36,6 +36,7 @@ int main(int argc, char* argv[]){
 
 
 	HandDisplay display(g_context);	
+	ArmTranslator translator;	
 
 	rc = display.Init();
 	
@@ -86,16 +87,31 @@ int main(int argc, char* argv[]){
 			const TrailIterator tit = trail.Begin();
 			
 			XnPoint3D	point = *tit;
-			int quadrant;
-				
-			if((quadrant = display.GetQuadrant(point)) < 1){
-				printf("Hand outside of range\n");
+			int quadrant, xLevel, yLevel, zLevel;
+			int motor1Val, motor2Val, motor3Val;
+	
+			if((xLevel = display.getXLevel(point.X)) < 1){
+				printf("X-Level out of range\n");
+				continue;
+			}
+	
+			if((yLevel = display.getYLevel(point.Y)) < 1){
+				printf("Y-Level out of range\n");
+				continue;
+			}
+			if((zLevel = display.getXLevel(point.X)) < 1){
+				printf("Z-Level out of range\n");
+				continue;
+			}
+			
+			if((motor1Val = translator.GetMotor1Value(xLevel)) < 600 || motor1Val > 2400){
+				printf("Error Translating value for motor 1\n");
 				continue;
 			}
 	
 			printf("User ID = %i\n", ID);
 			printf("X = %.2f, Y = %.2f, Z = %.2f\n", point.X, point.Y, point.Z);
-			printf("Quadrant = %i\n", quadrant);
+			printf("MOTOR 1 VALUE: %i\n", motor1Val);
 		}
 		
 		else{

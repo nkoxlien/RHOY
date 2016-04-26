@@ -9,25 +9,23 @@
 #include "ArmTranslator.h"
 
 
-ArmTranslator::ArmTranslator(int resolution) : m_rResolution(resolution){};
+ArmTranslator::ArmTranslator(){};
 
 
-int GetMotor1Value(int quadrant)t{
-
+int GetMotor1Value(int x){
+	
+	int value;
+	value = (((x-1)/(RESOLUTION-1)) * 1800) + 600;
+	
+	return 	value;
 }
 
-int GetMotor2Value(int quadrant){
+int GetMotor2Value(int y, int z){
 
+	return 0;
 }
 
-int GetMotor3Value(int quadrant){
+int GetMotor3Value(int y, int z){
 
+	return 0;
 }
-
-int GetMotor4Value(int quadrant){
-
-}
-
-int GetMotor5Value(int quadrant){
-
-}	

@@ -28,9 +28,6 @@ class HandDisplay{
 		HandDisplay(xn::Context& context);
 		HandTracker m_HandTracker;
 		int GetQuadrant(XnPoint3D point);
-
-	private:
-		
 		int getXLevel(float x);
 		int getYLevel(float y);
 		int getZLevel(float z);

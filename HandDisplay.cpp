@@ -13,7 +13,7 @@
 
 
 
-HandDisplay::HandDisplay(xn::Context& context ):
+HandDisplay::HandDisplay(xn::Context& context):
 m_HandTracker(context)
 {}
 
@@ -106,7 +106,7 @@ int HandDisplay::getYLevel(float y){
 		
 }
 
-int HandDisplay::getZLevel(float Z){
+int HandDisplay::getZLevel(float z){
 	
 	int resLength, level;
 	
