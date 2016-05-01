@@ -198,22 +198,21 @@ int socketStuff(float x, float y, float z){
     sprintf(buff,"X = %.2f, Y = %.2f, Z = %.2f\n", x, y, z);
     len = strlen(buff) + 1;
     
-    if(send(sockfd, buff, len, 0) < 0){
+    if(write(sockfd, buff, len) != len){
 
 	fprintf(stderr, "partial/failed write\n");
 	exit(EXIT_FAILURE);
     } 
     printf("Wrote!!");
 
-    //nread = read(sockfd, buff, len);
-    //if(nread == -1){
+    nread = read(sockfd, buff, len);
+    if(nread == -1){
 
-	//perror("read");
-	//exit(EXIT_FAILURE);
-    //}
-    //printf("received %zd bytes: %s\n", nread, buff);
-    //sleep(0.1);
-    close(sockfd);
+	perror("read");
+	exit(EXIT_FAILURE);
+    }
+    printf("received %zd bytes: %s\n", nread, buff);
+    sleep(0.1);
     return(0);
 
 }
