@@ -165,7 +165,7 @@ int socketStuff(float x, float y, float z){
     hints.ai_flags = 0;
     hints.ai_protocol = 0;
     
-    s = getaddrinfo("192.168.1.105", "20000", &hints, &result);
+    s = getaddrinfo("192.168.1.2", "22", &hints, &result);
     
     if(s != 0){
 	fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(s));
@@ -193,26 +193,50 @@ int socketStuff(float x, float y, float z){
 
     freeaddrinfo(result);
 
-    size_t len;
-    char buff[256];
-    sprintf(buff,"X = %.2f, Y = %.2f, Z = %.2f\n", x, y, z);
-    len = strlen(buff) + 1;
     
-    if(send(sockfd, buff, len, 0) < 0){
+    char xSend[4]; 
+    
+    char ySend[4];
+
+    char zSend[4];
+ 
+    xSend[3]  = (char)(0x00);
+    xSend[2]  =	(char)(0x00); 
+    xSend[1]  =	(char)(((((short)x) & 0xff00) >> 8));
+    xSend[0]  =	(char)(((short)x) & 0x00ff);
+    
+    ySend[3]  = (char)(0x00);
+    ySend[2]  =	(char)(0x01); 
+    ySend[1]  =	(char)((((short)y) & 0xff00) >> 8);
+    ySend[0]  =	(char)(((short)y) & 0x00ff);
+    
+    zSend[3]  = (char)(0x00);
+    zSend[2]  =	(char)(0x02); 
+    zSend[1]  =	(char)((((short)z) & 0xff00) >> 8);
+    zSend[0]  =	(char)(((short)z) & 0x00ff);
+     
+ 
+    if(send(sockfd, xSend, 4, 0) < 0){
 
 	fprintf(stderr, "partial/failed write\n");
 	exit(EXIT_FAILURE);
     } 
-    printf("Wrote!!");
+    printf("Wrote X!!\n");
+    
+    if(send(sockfd, ySend, 4 , 0) < 0){
 
-    //nread = read(sockfd, buff, len);
-    //if(nread == -1){
+	fprintf(stderr, "partial/failed write\n");
+	exit(EXIT_FAILURE);
+    } 
+    printf("Wrote Y!!\n");
 
-	//perror("read");
-	//exit(EXIT_FAILURE);
-    //}
-    //printf("received %zd bytes: %s\n", nread, buff);
-    //sleep(0.1);
+
+    if(send(sockfd, zSend, 4, 0) < 0){
+
+	fprintf(stderr, "partial/failed write\n");
+	exit(EXIT_FAILURE);
+    } 
+    printf("Wrote Z!!\n");
     close(sockfd);
     return(0);
 
