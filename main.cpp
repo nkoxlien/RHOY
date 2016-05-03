@@ -165,7 +165,7 @@ int socketStuff(float x, float y, float z){
     hints.ai_flags = 0;
     hints.ai_protocol = 0;
     
-    s = getaddrinfo("192.168.1.2", "22", &hints, &result);
+    s = getaddrinfo("192.168.1.3", "22", &hints, &result);
     
     if(s != 0){
 	fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(s));
